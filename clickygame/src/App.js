@@ -24,23 +24,26 @@ class App extends Component {
 		newPictures.forEach(pic => {
 
 			if(pic.id === id){
-				if(pic.clicked === true && this.state.Score >= this.state.TopScore) {
+				if(pic.clicked === true) {
+					if(this.state.Score >= this.state.TopScore) {
 					this.setState({
 						RightOrWrong: "You've guessed incorrectly!",
 						TopScore: this.Score,
 						Score: 0
 					});
-						newPictures.sort(() => Math.random() - 0.5);	
+						newPictures.sort(() => Math.random() - 0.5);
+						pic.clicked= false;	
 						}
 
 						else if (this.state.Score === 12){
 							this.setState({
-							RightOrWrong: "You Win!",
-							TopScore: this.Score,
-							Score: 0
+								RightOrWrong: "You Win!",
+								TopScore: this.Score,
+								Score: 0
 							})
+							newPictures.sort(() => Math.random() - 0.5);
+							pic.clicked= false;	
 						}
-
 
 						else {
 							this.setState({
@@ -49,10 +52,11 @@ class App extends Component {
 								Score: 0
 						});
 
-						newPictures.sort(() => Math.random() - 0.5);	
+						pictures.sort(() => Math.random() - 0.5);
+						pic.clicked= false;	
 						
 			}
-
+				}
 					return;
 
 		}
