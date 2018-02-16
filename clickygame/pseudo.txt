@@ -1,0 +1,19 @@
+Clicky Game:
+
+Start game:
+
+-> 12 pictures in random order, but fixed frame within a defined section
+-> Score = 0 
+-> Topscore = Highest score of a previous game (as long as player was logged in)
+
+on Click of a picture:
+
+-> (1) Score +1
+-> (2) check if pic was already clicked within same round
+		(2.1) if yes, check if Score is bigger than Topscore
+				(2.1.1) if yes, update Topscore with Score
+				(2.1.2) if no, Topscore does not change
+
+		(2.2) if not, update Score and shuffle picture
+
+-> (3) Game stops as soon as a picture was clicked twice
