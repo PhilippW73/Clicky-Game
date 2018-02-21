@@ -19,59 +19,52 @@ class App extends Component {
 	
 
 	increaseScore = (id) => {
+
 		const newPictures = [...this.state.pictures];
 
-		newPictures.forEach(pic => {
+		let newTopScore = 0;
+		let message = "";
+		let reset = false;
 
+		newPictures.forEach(pic => {
 			if(pic.id === id){
 				if(pic.clicked === true) {
+					reset = true;
+
 					if(this.state.Score >= this.state.TopScore) {
-					this.setState({
-						RightOrWrong: "You've guessed incorrectly!",
-						TopScore: this.Score,
-						Score: 0
-					});
-						newPictures.sort(() => Math.random() - 0.5);
-						pic.clicked= false;	
-						}
+						newTopScore = this.state.Score;
+						message = "You've guessed incorrectly!";						
+					}
 
-						else if (this.state.Score === 12){
-							this.setState({
-								RightOrWrong: "You Win!",
-								TopScore: this.Score,
-								Score: 0
-							})
-							newPictures.sort(() => Math.random() - 0.5);
-							pic.clicked= false;	
-						}
+					else if (this.state.Score === 12){
+						newTopScore = this.state.Score;
+						message = "You Win!";
+					}
 
-						else {
-							this.setState({
-								RightOrWrong: "You've guessed incorrectly!",
-								TopScore: this.TopScore,
-								Score: 0
-						});
-
-						pictures.sort(() => Math.random() - 0.5);
-						pic.clicked= false;	
-						
-			}
-				}
 					return;
-
-		}
+				}
 				else {
 					pic.clicked = true;
-					this.setState({ 
-						Score: this.state.Score + 1,
-						pictures: newPictures,
-						RightOrWrong: "You've guessed correctly!"
-					})
-
+					message = "You've guessed correctly!";
 					return;
 				}
-			});
+
+			}
+		});
+
+		if(reset){
+			newPictures.forEach(pic => pic.clicked = false);
 		}
+
+		newPictures.sort(() => Math.random() - 0.5);
+
+		this.setState({ 
+			Score: reset ? 0 : this.state.Score + 1,
+			TopScore: reset ? newTopScore : "",
+			pictures: newPictures,
+			RightOrWrong: message
+		});
+	}
 	 
 
 
@@ -107,6 +100,5 @@ class App extends Component {
 	
 }
 
-// const shuffleArray = arr => arr.sort(() => Math.random() - 0.5);
 
 export default App;

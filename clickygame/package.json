@@ -2,6 +2,7 @@
   "name": "clickygame",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://philippw73.github.io/Clicky-Game",
   "dependencies": {
     "csshake": "^1.5.3",
     "react": "^16.2.0",
